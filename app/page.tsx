@@ -156,15 +156,15 @@ export default function Home() {
             </div>
 
             <div className="mt-10 flex items-center gap-3">
-              <div className="relative h-10 w-10 overflow-hidden rounded-xl border border-slate-200 bg-white">
+              <div className="relative h-11 w-24 overflow-hidden rounded-xl border border-slate-200 bg-white">
                 <Image
-                  src="/emblem.png"
-                  alt="ATC Emblem"
+                  src="/atc%20logo.png"
+                  alt="ATC Logo"
                   fill
-                  className="object-contain p-1.5"
+                  className="object-contain p-2"
                 />
               </div>
-              <p className="text-xs text-slate-500">Powered by Arusha Technical College</p>
+              <p className="text-xs font-semibold tracking-widest text-slate-500 uppercase">Arusha Technical College</p>
             </div>
           </div>
         </div>

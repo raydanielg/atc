@@ -9,7 +9,10 @@ import {
   Globe, 
   Award, 
   Code2, 
-  Rocket, 
+  Layers,
+  Server,
+  MessageCircle,
+  Send,
   ChevronLeft,
   ExternalLink,
   MessageSquare,
@@ -18,6 +21,13 @@ import {
 } from "lucide-react";
 
 export default function DeveloperProfilePage() {
+  const phoneNumberLocal = "0613976254";
+  const phoneNumberIntl = "255613976254";
+  const message =
+    "Habari Ray Daniel, nimekuta namba yako kupitia Developer Profile kwenye ATC Student Portal prototype. Tunaweza kujadiliana kuhusu kuboresha mfumo huu?";
+  const whatsappLink = `https://wa.me/${phoneNumberIntl}?text=${encodeURIComponent(message)}`;
+  const smsLink = `sms:${phoneNumberLocal}?body=${encodeURIComponent(message)}`;
+
   return (
     <div className="min-h-screen bg-slate-50 font-sans text-slate-900">
       {/* Header/Navigation */}
@@ -107,6 +117,36 @@ export default function DeveloperProfilePage() {
                 <p className="text-slate-600 leading-relaxed">
                   This Student Portal prototype was built to demonstrate how modern web technologies like <span className="font-semibold text-slate-900">React, Next.js, and Tailwind CSS</span> can transform institutional management systems into fast, accessible, and intuitive platforms.
                 </p>
+
+                <div className="grid gap-4 sm:grid-cols-2">
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                    <div className="flex items-center gap-2 text-blue-700">
+                      <Layers className="h-4 w-4" />
+                      <p className="text-xs font-black uppercase tracking-widest">Frontend</p>
+                    </div>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <TechPill label="React" />
+                      <TechPill label="Next.js" />
+                      <TechPill label="TypeScript" />
+                      <TechPill label="Tailwind CSS" />
+                      <TechPill label="Lucide Icons" />
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-slate-200 bg-slate-50 p-5">
+                    <div className="flex items-center gap-2 text-orange-700">
+                      <Server className="h-4 w-4" />
+                      <p className="text-xs font-black uppercase tracking-widest">Backend</p>
+                    </div>
+                    <div className="mt-3 flex flex-wrap gap-2">
+                      <TechPill label="API (REST)" />
+                      <TechPill label="Node.js" />
+                      <TechPill label="Auth" />
+                      <TechPill label="Database" />
+                      <TechPill label="Deployment" />
+                    </div>
+                  </div>
+                </div>
                 
                 <div className="grid gap-6 sm:grid-cols-2">
                   <div className="flex gap-4">
@@ -128,6 +168,41 @@ export default function DeveloperProfilePage() {
                     </div>
                   </div>
                 </div>
+
+                <div className="rounded-2xl border border-slate-200 bg-white p-5">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="flex items-start gap-3">
+                      <div className="mt-0.5 flex h-10 w-10 items-center justify-center rounded-xl bg-emerald-50 text-emerald-700">
+                        <MessageCircle className="h-5 w-5" />
+                      </div>
+                      <div>
+                        <p className="text-sm font-bold text-slate-900">Collaboration</p>
+                        <p className="mt-1 text-sm text-slate-600">
+                          If you want us to collaborate and improve this system, send me a WhatsApp message.
+                        </p>
+                      </div>
+                    </div>
+
+                    <div className="flex flex-wrap gap-2">
+                      <a
+                        href={whatsappLink}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="inline-flex h-10 items-center justify-center gap-2 rounded-full bg-emerald-600 px-5 text-sm font-bold text-white transition hover:bg-emerald-700"
+                      >
+                        <Send className="h-4 w-4" />
+                        DM on WhatsApp
+                      </a>
+                      <a
+                        href={smsLink}
+                        className="inline-flex h-10 items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-5 text-sm font-bold text-slate-800 transition hover:bg-slate-50"
+                      >
+                        <MessageSquare className="h-4 w-4" />
+                        Send SMS
+                      </a>
+                    </div>
+                  </div>
+                </div>
               </div>
             </section>
 
@@ -137,15 +212,28 @@ export default function DeveloperProfilePage() {
               <p className="mt-2 text-blue-100 text-sm opacity-80">
                 This project is a testament to the power of innovation in education. Dedicated to all tech-driven students at ATC.
               </p>
-              <button className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-2 text-sm font-bold text-blue-600 transition hover:bg-blue-50">
-                Get in touch
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-6 inline-flex items-center gap-2 rounded-full bg-white px-6 py-2 text-sm font-bold text-blue-600 transition hover:bg-blue-50"
+              >
+                Get in touch (WhatsApp)
                 <ExternalLink className="h-4 w-4" />
-              </button>
+              </a>
             </div>
           </div>
         </div>
       </main>
     </div>
+  );
+}
+
+function TechPill({ label }: { label: string }) {
+  return (
+    <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-semibold text-slate-700">
+      {label}
+    </span>
   );
 }
 
