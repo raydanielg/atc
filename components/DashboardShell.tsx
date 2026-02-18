@@ -77,10 +77,41 @@ export default function DashboardShell({
                 message="All students with outstanding fees are advised to complete fee payment as soon as possible."
               />
             </div>
+            <div className="mb-5 flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => router.back()}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-800 transition hover:bg-slate-50"
+                aria-label="Go back"
+              >
+                <ArrowLeftIcon />
+              </button>
+
+              <div className="text-sm font-semibold text-slate-800">
+                <span className="text-slate-500">Home</span>
+                <span className="px-2 text-slate-300">/</span>
+                <span>{title}</span>
+              </div>
+            </div>
             {children}
           </main>
         </div>
       </div>
     </div>
+  );
+}
+
+function ArrowLeftIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M10 6 4 12l6 6"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M4.5 12H20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
   );
 }
