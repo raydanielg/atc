@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Info, X, Rocket, Code, User } from "lucide-react";
+import Link from "next/link";
+import { Info, X, Sparkles, User, ChevronRight, GraduationCap } from "lucide-react";
 
 export default function ProjectInfo() {
   const [isOpen, setIsOpen] = useState(false);
@@ -33,7 +34,7 @@ export default function ProjectInfo() {
             <div className="bg-orange-500 p-6 text-white">
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2">
-                  <Rocket className="h-6 w-6" />
+                  <Sparkles className="h-5 w-5" />
                   <h2 className="text-xl font-bold">Project Innovation</h2>
                 </div>
                 <button 
@@ -59,7 +60,7 @@ export default function ProjectInfo() {
               <div className="space-y-4">
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                    <Code className="h-5 w-5" />
+                    <GraduationCap className="h-5 w-5" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Project Type</p>
@@ -80,23 +81,25 @@ export default function ProjectInfo() {
 
                 <div className="flex items-start gap-4">
                   <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-blue-50 text-blue-600">
-                    <Rocket className="h-5 w-5" />
+                    <Sparkles className="h-5 w-5" />
                   </div>
                   <div>
                     <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Objective</p>
                     <p className="text-sm leading-relaxed text-slate-700 font-medium">
-                      Innovation of ICT systems to modernize student services and administrative workflows.
+                      Innovation of ICT systems to modernize student services.
                     </p>
                   </div>
                 </div>
               </div>
 
-              <button
+              <Link
+                href="/developer/ray-daniel"
                 onClick={() => setIsOpen(false)}
-                className="mt-8 w-full rounded-2xl bg-slate-900 py-4 text-sm font-bold text-white transition hover:bg-slate-800 active:scale-95"
+                className="mt-8 flex w-full items-center justify-center gap-2 rounded-2xl bg-slate-900 py-4 text-sm font-bold text-white transition hover:bg-slate-800 active:scale-95"
               >
-                Got it, thanks!
-              </button>
+                View Developer Profile
+                <ChevronRight className="h-4 w-4" />
+              </Link>
             </div>
           </div>
         </div>

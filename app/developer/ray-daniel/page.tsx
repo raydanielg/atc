@@ -12,7 +12,9 @@ import {
   Rocket, 
   ChevronLeft,
   ExternalLink,
-  MessageSquare
+  MessageSquare,
+  Phone,
+  Zap
 } from "lucide-react";
 
 export default function DeveloperProfilePage() {
@@ -42,10 +44,10 @@ export default function DeveloperProfilePage() {
               <div className="overflow-hidden rounded-3xl border border-slate-200 bg-white p-2 shadow-sm">
                 <div className="relative aspect-square overflow-hidden rounded-2xl bg-slate-100">
                   <Image
-                    src="/portrait-confident-dark-skinned-woman-enterpreneur-with-serious-look-wears-round-glasses-red-blouse-going-meet-with-partners-from-abroad-prepares-presenting-company-isolated-white.jpg"
+                    src="/WhatsApp Image 2026-02-17 at 11.58.03 PM.jpeg"
                     alt="Ray Daniel"
                     fill
-                    className="object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                    className="object-cover transition-all duration-500 hover:scale-105"
                   />
                 </div>
                 <div className="p-4 text-center">
@@ -61,9 +63,10 @@ export default function DeveloperProfilePage() {
               <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
                 <h2 className="text-sm font-bold uppercase tracking-wider text-slate-400">Connect</h2>
                 <div className="mt-4 space-y-3">
-                  <SocialLink icon={<Github className="h-4 w-4" />} label="GitHub" href="#" />
+                  <SocialLink icon={<Github className="h-4 w-4" />} label="GitHub" href="https://github.com/raydanielg" />
                   <SocialLink icon={<Linkedin className="h-4 w-4" />} label="LinkedIn" href="#" />
-                  <SocialLink icon={<Mail className="h-4 w-4" />} label="Email" href="mailto:ray@example.com" />
+                  <SocialLink icon={<Mail className="h-4 w-4" />} label="Email" href="mailto:airezra2@gmail.com" />
+                  <SocialLink icon={<Phone className="h-4 w-4" />} label="Phone" href="tel:0613976254" />
                 </div>
               </div>
             </div>
@@ -97,7 +100,7 @@ export default function DeveloperProfilePage() {
             {/* Project Details Section */}
             <section className="rounded-3xl border border-slate-200 bg-white p-8 shadow-sm">
               <div className="flex items-center gap-3 text-orange-600">
-                <Rocket className="h-6 w-6" />
+                <Zap className="h-6 w-6 fill-orange-600/10" />
                 <h2 className="text-xl font-bold">Innovation Focus</h2>
               </div>
               <div className="mt-6 space-y-6">
