@@ -2,7 +2,7 @@
 
 import { useMemo, useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { CreditCard, Download, Share2, Loader2, Info } from "lucide-react";
+import { CreditCard, Share2, Info } from "lucide-react";
 import Barcode from "react-barcode";
 import QRCode from "react-qr-code";
 import { toPng } from "html-to-image";
@@ -36,42 +36,6 @@ export default function HostelCard({
 
   const profileUrl = typeof window !== "undefined" ? `${window.location.origin}/dashboard/profile` : "";
 
-  const handleDownload = async () => {
-    if (!cardRef.current) return;
-    setDownloading(true);
-    try {
-      const pdf = new jsPDF({
-        orientation: "landscape",
-        unit: "mm",
-        format: [85.6, 53.98],
-      });
-
-      setFlipped(false);
-      await new Promise((r) => setTimeout(r, 500));
-      const frontDataUrl = await toPng(cardRef.current, {
-        cacheBust: true,
-        pixelRatio: 3,
-      });
-      pdf.addImage(frontDataUrl, "PNG", 0, 0, 85.6, 53.98);
-
-      pdf.addPage([85.6, 53.98], "landscape");
-      setFlipped(true);
-      await new Promise((r) => setTimeout(r, 500));
-      const backDataUrl = await toPng(cardRef.current, {
-        cacheBust: true,
-        pixelRatio: 3,
-      });
-      pdf.addImage(backDataUrl, "PNG", 0, 0, 85.6, 53.98);
-
-      pdf.save(`atc-hostel-card-${registrationNumber}.pdf`);
-      setFlipped(false);
-    } catch (err) {
-      console.error("Failed to generate PDF", err);
-    } finally {
-      setDownloading(false);
-    }
-  };
-
   const cardStyles = {
     container: { perspective: "1500px" },
     card: {
@@ -102,13 +66,16 @@ export default function HostelCard({
             className="absolute inset-0 overflow-hidden rounded-[22px] text-white"
             style={cardStyles.face}
           >
-            <div className="relative h-full w-full bg-gradient-to-br from-blue-900 via-blue-800 to-blue-600">
+            <div className="relative h-full w-full bg-[#003366]">
               <div className="absolute -left-12 -top-10 h-40 w-40 rounded-full bg-blue-300/20 blur-3xl" />
               <div className="absolute -bottom-12 -right-10 h-40 w-40 rounded-full bg-blue-300/20 blur-3xl" />
               <div className="absolute inset-0 opacity-5 [background-image:repeating-linear-gradient(135deg,rgba(255,255,255,0.18)_0,rgba(255,255,255,0.18)_2px,transparent_2px,transparent_8px)]" />
 
               {/* Top White Section */}
-              <div className="absolute top-0 left-0 right-0 h-[45%] bg-white shadow-sm">
+              <div className="absolute top-0 left-0 right-0 h-[40%] bg-white shadow-sm overflow-hidden">
+                {/* Patterned lines background */}
+                <div className="absolute inset-0 opacity-[0.03] [background-image:linear-gradient(45deg,#003366_25%,transparent_25%,transparent_50%,#003366_50%,#003366_75%,transparent_75%,transparent)] [background-size:10px_10px]" />
+                <div className="absolute inset-0 opacity-[0.05] [background-image:repeating-linear-gradient(-45deg,transparent,transparent_5px,#003366_5px,#003366_6px)]" />
                 <div className="absolute bottom-0 left-0 right-0 h-12 translate-y-full overflow-hidden">
                   <svg viewBox="0 0 500 150" preserveAspectRatio="none" className="h-full w-full">
                     <path
@@ -121,14 +88,24 @@ export default function HostelCard({
 
               <div className="relative h-full w-full p-5 flex flex-col">
                 <div className="relative flex items-start justify-between">
-                  <div className="flex items-center gap-2 pt-1 text-blue-900">
-                    <CreditCard className="h-5 w-5" />
-                    <span className="text-[10px] font-black tracking-tight uppercase">
-                      ATC HOSTEL CARD
+                  <div className="flex flex-col pt-1 text-[#003366]">
+                    <div className="flex items-center gap-2">
+                      <CreditCard className="h-4 w-4" />
+                      <span className="text-[11px] font-black tracking-tighter uppercase leading-none">
+                        Arusha Technical College
+                      </span>
+                    </div>
+                    <span className="text-[9px] font-bold tracking-[0.2em] uppercase mt-1 opacity-80">
+                      Hostel Card
                     </span>
                   </div>
-                  <div className="relative h-10 w-10">
-                    <Image src="/atc%20logo.png" alt="Logo" fill className="object-contain" />
+                  <div className="flex flex-col items-end">
+                    <div className="relative h-10 w-10">
+                      <Image src="/atc%20logo.png" alt="Logo" fill className="object-contain" />
+                    </div>
+                    <span className="text-[7px] font-bold text-blue-900 tracking-tight italic mt-1">
+                      Skills make the difference
+                    </span>
                   </div>
                 </div>
 
@@ -217,22 +194,10 @@ export default function HostelCard({
         </div>
       </div>
 
-      <div className="mt-8 flex gap-4">
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            handleDownload();
-          }}
-          disabled={downloading}
-          className="flex items-center gap-2 rounded-xl bg-blue-600 px-6 py-3 font-semibold text-white shadow-lg transition-all hover:bg-blue-700 active:scale-95 disabled:opacity-70"
-        >
-          {downloading ? <Loader2 className="h-5 w-5 animate-spin" /> : <Download className="h-5 w-5" />}
-          <span>{downloading ? "Preparing..." : "Download Card"}</span>
-        </button>
-        <button className="flex items-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-blue-700 shadow-lg ring-1 ring-blue-100 transition-all hover:bg-gray-50 active:scale-95">
-          <Share2 className="h-5 w-5" />
-          <span>Share</span>
-        </button>
+      <div className="mt-8">
+        <p className="text-sm text-gray-500">
+          Tap the card to view the back.
+        </p>
       </div>
     </div>
   );
