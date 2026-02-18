@@ -19,7 +19,8 @@ import {
   ShieldCheck,
   Clock,
   ArrowUpRight,
-  Zap
+  Zap,
+  Vote
 } from "lucide-react";
 
 export default function DashboardPage() {
@@ -73,6 +74,7 @@ export default function DashboardPage() {
               <QuickLinkCard href="/dashboard/assessment-plans" title="Assessments" icon={<PieChart className="h-5 w-5" />} color="orange" />
               <QuickLinkCard href="/dashboard/results" title="Results" icon={<GraduationCap className="h-5 w-5" />} color="violet" />
               <QuickLinkCard href="/dashboard/soteco" title="SOTECO" icon={<Users2 className="h-5 w-5" />} color="red" />
+              <QuickLinkCard href="/dashboard/voting" title="Voting" icon={<Vote className="h-5 w-5" />} color="orange" />
               <QuickLinkCard href="/dashboard/hostel" title="Hostel" icon={<Bed className="h-5 w-5" />} color="cyan" />
               <QuickLinkCard href="/dashboard/student-id" title="Student ID" icon={<Contact className="h-5 w-5" />} color="slate" />
               <QuickLinkCard href="/dashboard/ipt-arrival-note" title="IPT/Training" icon={<MapPin className="h-5 w-5" />} color="amber" />
