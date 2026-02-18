@@ -17,6 +17,7 @@ const navItems: NavItem[] = [
   { label: "Overview", href: "/dashboard" },
   { label: "Profile", href: "/dashboard/profile" },
   { label: "User Manual", href: "/dashboard/user-manual" },
+  { label: "SOTECO", href: "/dashboard/soteco" },
   { label: "Registration", href: "/dashboard/registration" },
   { label: "Modules", href: "/dashboard/modules" },
   { label: "Timetable", href: "/dashboard/timetable" },
