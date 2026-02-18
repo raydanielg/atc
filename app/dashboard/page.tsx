@@ -52,6 +52,8 @@ export default function DashboardPage() {
           description="Industrial training"
           icon={<IconPin />}
         />
+        <QuickLinkCard href="/dashboard/hostel" title="Hostel" description="Accommodation" icon={<IconBed />} />
+        <QuickLinkCard href="/dashboard/student-id" title="Student ID" description="ID details" icon={<IconCard />} />
         <QuickLinkCard href="/dashboard/user-manual" title="User manual" description="Help" icon={<IconBook />} />
         <QuickLinkCard href="/dashboard/alumni" title="Alumni" description="Alumni info" icon={<IconUsers />} />
         <QuickLinkCard href="/dashboard/profile" title="Profile" description="Your details" icon={<IconUser />} />
@@ -102,6 +104,53 @@ function IconHome() {
         strokeWidth="1.8"
         strokeLinejoin="round"
       />
+    </svg>
+  );
+}
+
+function IconBed() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M4.5 12.5v7M19.5 12.5v7"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M4.5 14.5h15"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M6.5 6.5h11a2 2 0 0 1 2 2v6H4.5v-6a2 2 0 0 1 2-2Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.5 10h3"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function IconCard() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M4.5 7.5h15v11a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-11Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path d="M4.5 10.5h15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M8 14h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M8 17h3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   );
 }

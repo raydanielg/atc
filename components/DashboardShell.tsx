@@ -25,6 +25,8 @@ const navItems: NavItem[] = [
   { label: "Results", href: "/dashboard/results" },
   { label: "Exam Results", href: "/dashboard/exam-results" },
   { label: "IPT Arrival Note", href: "/dashboard/ipt-arrival-note" },
+  { label: "Hostel", href: "/dashboard/hostel" },
+  { label: "Student ID", href: "/dashboard/student-id" },
   { label: "Alumni", href: "/dashboard/alumni" },
 ];
 
