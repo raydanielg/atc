@@ -1,261 +1,108 @@
 "use client";
 
 import type { ReactNode } from "react";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
-
-type SectionKey =
-  | "overview"
-  | "profile"
-  | "user-manual"
-  | "registration"
-  | "timetable"
-  | "results"
-  | "alumni";
+import Link from "next/link";
+import DashboardShell from "@/components/DashboardShell";
 
 export default function DashboardPage() {
-  const router = useRouter();
-  const [registrationNumber, setRegistrationNumber] = useState<string>("");
-  const [active, setActive] = useState<SectionKey>("overview");
-
-  useEffect(() => {
-    const reg = sessionStorage.getItem("atc_registration_number") ?? "";
-    setRegistrationNumber(reg);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-white text-slate-900">
-      <div className="mx-auto flex min-h-screen w-full max-w-7xl">
-        <aside className="hidden w-72 flex-col border-r border-slate-200 bg-white px-5 py-6 lg:flex">
-          <div className="flex items-center gap-3">
-            <div className="relative h-10 w-10 overflow-hidden rounded-xl border border-slate-200 bg-white">
-              <Image src="/emblem.png" alt="ATC Emblem" fill className="object-contain p-1.5" />
-            </div>
-            <div>
-              <p className="text-sm font-semibold leading-5">Arusha Technical College</p>
-              <p className="text-xs text-slate-500">ATC Student Portal</p>
-            </div>
-          </div>
-
-          <nav className="mt-8 grid gap-1">
-            <SidebarItem label="Overview" active={active === "overview"} onClick={() => setActive("overview")} />
-            <SidebarItem label="Profile" active={active === "profile"} onClick={() => setActive("profile")} />
-            <SidebarItem
-              label="User Manual"
-              active={active === "user-manual"}
-              onClick={() => setActive("user-manual")}
-            />
-            <SidebarItem
-              label="Registration"
-              active={active === "registration"}
-              onClick={() => setActive("registration")}
-            />
-            <SidebarItem
-              label="Timetable"
-              active={active === "timetable"}
-              onClick={() => setActive("timetable")}
-            />
-            <SidebarItem label="Results" active={active === "results"} onClick={() => setActive("results")} />
-            <SidebarItem
-              label="Alumni"
-              active={active === "alumni"}
-              onClick={() => setActive("alumni")}
-            />
-          </nav>
-
-          <div className="mt-auto pt-6">
-            <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-              <p className="text-xs font-semibold tracking-widest text-slate-500">SIGNED IN AS</p>
-              <p className="mt-2 text-sm font-semibold text-slate-900">
-                {registrationNumber ? registrationNumber : "Registration Number"}
-              </p>
-            </div>
-
-            <button
-              type="button"
-              onClick={() => {
-                sessionStorage.removeItem("atc_registration_number");
-                router.push("/");
-              }}
-              className="mt-4 inline-flex h-10 w-full items-center justify-center rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
-            >
-              Sign out
-            </button>
-          </div>
-        </aside>
-
-        <div className="flex min-w-0 flex-1 flex-col">
-          <header className="flex items-center justify-between gap-4 border-b border-slate-200 bg-white px-6 py-4">
-            <div className="flex items-center gap-3">
-              <div className="relative h-9 w-28 lg:hidden">
-                <Image src="/atc%20logo.png" alt="Arusha Technical College" fill className="object-contain" />
-              </div>
-              <div>
-                <p className="text-sm font-semibold">Dashboard</p>
-                <p className="text-xs text-slate-500">Welcome{registrationNumber ? `, ${registrationNumber}` : ""}</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setActive("profile")}
-                className="hidden rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 transition hover:bg-slate-50 sm:inline-flex"
-              >
-                Profile
-              </button>
-              <button
-                type="button"
-                onClick={() => {
-                  sessionStorage.removeItem("atc_registration_number");
-                  router.push("/");
-                }}
-                className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
-              >
-                Logout
-              </button>
-            </div>
-          </header>
-
-          <main className="flex-1 px-6 py-6">
-            {active === "overview" ? (
-              <div className="grid gap-4 grid-cols-2 md:grid-cols-3 xl:grid-cols-4">
-                <QuickCard
-                  title="Profile"
-                  description="Your details"
-                  icon={<IconUser />}
-                  onClick={() => setActive("profile")}
-                />
-                <QuickCard
-                  title="User Manual"
-                  description="How to use the portal"
-                  icon={<IconBook />}
-                  onClick={() => setActive("user-manual")}
-                />
-                <QuickCard
-                  title="Registration"
-                  description="Semester registration"
-                  icon={<IconClipboard />}
-                  onClick={() => setActive("registration")}
-                />
-                <QuickCard
-                  title="Timetable"
-                  description="Class schedule"
-                  icon={<IconCalendar />}
-                  onClick={() => setActive("timetable")}
-                />
-                <QuickCard
-                  title="Results"
-                  description="Academic performance"
-                  icon={<IconChart />}
-                  onClick={() => setActive("results")}
-                />
-                <QuickCard
-                  title="Alumni"
-                  description="Alumni info"
-                  icon={<IconUsers />}
-                  onClick={() => setActive("alumni")}
-                />
-              </div>
-            ) : (
-              <div className="rounded-3xl border border-slate-200 bg-white p-6">
-                <div className="flex items-center justify-between gap-4">
-                  <h2 className="text-lg font-semibold">{sectionTitle(active)}</h2>
-                  <button
-                    type="button"
-                    onClick={() => setActive("overview")}
-                    className="rounded-full border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
-                  >
-                    Back
-                  </button>
-                </div>
-                <p className="mt-2 text-sm text-slate-600">Coming soon.</p>
-              </div>
-            )}
-          </main>
-        </div>
+    <DashboardShell title="Dashboard">
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+        <QuickLinkCard href="/dashboard" title="Dashboard" description="Home" icon={<IconHome />} />
+        <QuickLinkCard
+          href="/dashboard/registration"
+          title="Registration"
+          description="Semester registration"
+          icon={<IconClipboard />}
+        />
+        <QuickLinkCard href="/dashboard/modules" title="Modules" description="My modules" icon={<IconGrid />} />
+        <QuickLinkCard
+          href="/dashboard/timetable"
+          title="Timetable"
+          description="Class schedule"
+          icon={<IconCalendar />}
+        />
+        <QuickLinkCard
+          href="/dashboard/assessment-plans"
+          title="Assessment plans"
+          description="Course assessments"
+          icon={<IconChecklist />}
+        />
+        <QuickLinkCard
+          href="/dashboard/exam-numbers"
+          title="Exam numbers"
+          description="Exam slip numbers"
+          icon={<IconIdCard />}
+        />
+        <QuickLinkCard
+          href="/dashboard/exam-results"
+          title="Exam results"
+          description="Final exam results"
+          icon={<IconChart />}
+        />
+        <QuickLinkCard
+          href="/dashboard/results"
+          title="Results"
+          description="Academic results"
+          icon={<IconChart />} 
+        />
+        <QuickLinkCard
+          href="/dashboard/ipt-arrival-note"
+          title="IPT Arrival Note"
+          description="Industrial training"
+          icon={<IconPin />}
+        />
+        <QuickLinkCard href="/dashboard/user-manual" title="User manual" description="Help" icon={<IconBook />} />
+        <QuickLinkCard href="/dashboard/alumni" title="Alumni" description="Alumni info" icon={<IconUsers />} />
+        <QuickLinkCard href="/dashboard/profile" title="Profile" description="Your details" icon={<IconUser />} />
       </div>
-    </div>
+    </DashboardShell>
   );
 }
 
-function SidebarItem({
-  label,
-  active,
-  onClick,
-}: {
-  label: string;
-  active: boolean;
-  onClick: () => void;
-}) {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      className={
-        active
-          ? "flex h-10 w-full items-center rounded-xl bg-slate-100 px-3 text-left text-sm font-semibold text-slate-900"
-          : "flex h-10 w-full items-center rounded-xl px-3 text-left text-sm font-semibold text-slate-700 transition hover:bg-slate-50"
-      }
-    >
-      {label}
-    </button>
-  );
-}
-
-function StatCard({
-  title,
-  value,
-  subtitle,
-}: {
-  title: string;
-  value: string;
-  subtitle: string;
-}) {
-  return (
-    <div className="rounded-3xl border border-slate-200 bg-white p-5">
-      <p className="text-xs font-semibold tracking-widest text-slate-500">{title}</p>
-      <p className="mt-2 text-2xl font-semibold text-slate-900">{value}</p>
-      <p className="mt-1 text-sm text-slate-600">{subtitle}</p>
-    </div>
-  );
-}
-
-function PlaceholderCard({ title, text }: { title: string; text: string }) {
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-slate-50 p-4">
-      <p className="text-sm font-semibold text-slate-900">{title}</p>
-      <p className="mt-1 text-sm leading-6 text-slate-600">{text}</p>
-    </div>
-  );
-}
-
-function QuickCard({
+function QuickLinkCard({
+  href,
   title,
   description,
   icon,
-  onClick,
 }: {
+  href: string;
   title: string;
   description: string;
   icon: ReactNode;
-  onClick: () => void;
 }) {
   return (
-    <button
-      type="button"
-      onClick={onClick}
-      className="group flex w-full items-start justify-between gap-4 rounded-3xl border border-slate-200 bg-white p-6 text-left transition hover:bg-slate-50"
+    <Link
+      href={href}
+      className="group w-full rounded-3xl border border-slate-200 bg-white p-6 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50 hover:shadow-lg hover:shadow-black/[.06] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/10 motion-reduce:transform-none"
     >
-      <div>
-        <p className="text-base font-semibold text-slate-900">{title}</p>
-        <p className="mt-2 text-sm leading-6 text-slate-600">{description}</p>
+      <div className="flex flex-col items-start">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 bg-white text-[color:var(--brand-blue)] transition duration-200 group-hover:border-blue-200 group-hover:bg-blue-50 group-hover:scale-[1.03] motion-reduce:transform-none">
+          {icon}
+        </div>
+        <p className="mt-4 text-base font-semibold text-slate-900">{title}</p>
+        <p className="mt-1 text-sm leading-6 text-slate-600">{description}</p>
       </div>
-      <div className="flex h-11 w-11 items-center justify-center rounded-2xl border border-slate-200 bg-white text-[color:var(--brand-blue)] transition group-hover:border-blue-200 group-hover:bg-blue-50">
-        {icon}
-      </div>
-    </button>
+    </Link>
+  );
+}
+
+function IconHome() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M4.5 10.5 12 4l7.5 6.5V20a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-9.5Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 22v-7h4v7"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
@@ -343,6 +190,92 @@ function IconChart() {
   );
 }
 
+function IconGrid() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M4.5 4.5h6v6h-6v-6Zm9 0h6v6h-6v-6Zm-9 9h6v6h-6v-6Zm9 0h6v6h-6v-6Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconChecklist() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M9 6.5h10M9 12h10M9 17.5h10"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M5 6.5l1.1 1.1L7.8 5.8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5 12l1.1 1.1L7.8 11.3"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5 17.5l1.1 1.1 1.7-1.8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconIdCard() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M4.5 7.5h15v11a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-11Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path d="M8 11.5h6M8 15.5h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path
+        d="M4.5 7.5V6.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v1"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconPin() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M12 22s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 12a2.3 2.3 0 1 0 0-4.6A2.3 2.3 0 0 0 12 12Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
 function IconUsers() {
   return (
     <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
@@ -366,25 +299,4 @@ function IconUsers() {
       />
     </svg>
   );
-}
-
-function sectionTitle(key: SectionKey) {
-  switch (key) {
-    case "overview":
-      return "Overview";
-    case "profile":
-      return "Profile";
-    case "user-manual":
-      return "User Manual";
-    case "registration":
-      return "Registration";
-    case "timetable":
-      return "Timetable";
-    case "results":
-      return "Results";
-    case "alumni":
-      return "Alumni";
-    default:
-      return "Overview";
-  }
 }
