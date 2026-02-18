@@ -113,6 +113,16 @@ export default function Home() {
                   Sign in
                 </button>
 
+                <p className="text-center text-sm text-slate-600">
+                  Are you first year student?{" "}
+                  <a
+                    href="/signup"
+                    className="font-semibold text-[color:var(--brand-blue)] hover:opacity-90"
+                  >
+                    Sign up
+                  </a>
+                </p>
+
                 <p className="pt-2 text-center text-sm text-slate-600">
                   Don&apos;t have an account?{" "}
                   <a

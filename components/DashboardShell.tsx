@@ -19,6 +19,11 @@ const navItems: NavItem[] = [
   { label: "User Manual", href: "/dashboard/user-manual" },
   { label: "SOTECO", href: "/dashboard/soteco" },
   { label: "Voting", href: "/dashboard/voting" },
+  { label: "Academic Adviser", href: "/dashboard/academic-adviser" },
+  { label: "Resume Studies", href: "/dashboard/resume-studies" },
+  { label: "Postpone Students", href: "/dashboard/postpone-students" },
+  { label: "Temporary Leave", href: "/dashboard/temporary-leave" },
+  { label: "Clearance", href: "/dashboard/clearance" },
   { label: "Registration", href: "/dashboard/registration" },
   { label: "Modules", href: "/dashboard/modules" },
   { label: "Timetable", href: "/dashboard/timetable" },
@@ -41,6 +46,7 @@ export default function DashboardShell({
 }) {
   const router = useRouter();
   const [registrationNumber, setRegistrationNumber] = useState<string>("");
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
   const studentName = "Aisha M. Joseph";
 
   useEffect(() => {
@@ -50,11 +56,24 @@ export default function DashboardShell({
   return (
     <div className="min-h-screen bg-white text-slate-900">
       <div className="mx-auto flex min-h-screen w-full max-w-7xl">
-        <Sidebar navItems={navItems} registrationNumber={registrationNumber} />
+        <Sidebar
+          navItems={navItems}
+          registrationNumber={registrationNumber}
+          open={mobileNavOpen}
+          onClose={() => setMobileNavOpen(false)}
+        />
 
         <div className="flex min-w-0 flex-1 flex-col">
           <header className="flex items-center justify-between gap-4 border-b border-slate-200 bg-white px-6 py-4">
             <div className="flex items-center gap-3">
+              <button
+                type="button"
+                onClick={() => setMobileNavOpen(true)}
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-800 transition hover:bg-slate-50 lg:hidden"
+                aria-label="Open navigation"
+              >
+                <MenuIcon />
+              </button>
               <div className="relative h-9 w-28 lg:hidden">
                 <Image src="/atc%20logo.png" alt="Arusha Technical College" fill className="object-contain" />
               </div>
@@ -116,6 +135,16 @@ function ArrowLeftIcon() {
         strokeLinejoin="round"
       />
       <path d="M4.5 12H20" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function MenuIcon() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path d="M5 7h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M5 12h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M5 17h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
     </svg>
   );
 }

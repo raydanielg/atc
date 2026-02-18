@@ -3,6 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useEffect } from "react";
 
 export type SidebarNavItem = {
   label: string;
@@ -12,15 +13,33 @@ export type SidebarNavItem = {
 export default function Sidebar({
   navItems,
   registrationNumber,
+  open,
+  onClose,
 }: {
   navItems: SidebarNavItem[];
   registrationNumber: string;
+  open?: boolean;
+  onClose?: () => void;
 }) {
   const pathname = usePathname();
   const router = useRouter();
 
-  return (
-    <aside className="hidden w-72 flex-col border-r border-slate-200 bg-white px-5 py-6 lg:flex">
+  useEffect(() => {
+    if (!open) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClose?.();
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [open, onClose]);
+
+  const NavContent = (
+    <>
       <div className="flex items-center gap-3">
         <div className="relative h-10 w-28">
           <Image src="/atc%20logo.png" alt="Arusha Technical College" fill className="object-contain" />
@@ -38,6 +57,7 @@ export default function Sidebar({
             <Link
               key={item.href}
               href={item.href}
+              onClick={() => onClose?.()}
               className={
                 active
                   ? "flex h-10 w-full items-center rounded-xl bg-slate-100 px-3 text-left text-sm font-semibold text-slate-900"
@@ -66,6 +86,7 @@ export default function Sidebar({
           type="button"
           onClick={() => {
             sessionStorage.removeItem("atc_registration_number");
+            onClose?.();
             router.push("/");
           }}
           className="mt-4 inline-flex h-10 w-full items-center justify-center rounded-xl border border-slate-200 bg-white text-sm font-semibold text-slate-800 transition hover:bg-slate-50"
@@ -73,6 +94,28 @@ export default function Sidebar({
           Logout
         </button>
       </div>
-    </aside>
+    </>
+  );
+
+  return (
+    <>
+      {open ? (
+        <div className="fixed inset-0 z-50 lg:hidden">
+          <button
+            type="button"
+            className="absolute inset-0 bg-slate-950/40 backdrop-blur-[2px]"
+            onClick={() => onClose?.()}
+            aria-label="Close navigation"
+          />
+          <aside className="absolute left-0 top-0 flex h-full w-72 flex-col border-r border-slate-200 bg-white px-5 py-6 shadow-2xl">
+            {NavContent}
+          </aside>
+        </div>
+      ) : null}
+
+      <aside className="hidden w-72 flex-col border-r border-slate-200 bg-white px-5 py-6 lg:flex">
+        {NavContent}
+      </aside>
+    </>
   );
 }
