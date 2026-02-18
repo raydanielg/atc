@@ -32,7 +32,6 @@ export const metadata: Metadata = {
     apple: "/atc%20logo.png",
     shortcut: "/atc%20logo.png",
   },
-  themeColor: "#003366",
   openGraph: {
     title: "Arusha Technical College | ATC Student Portal",
     description: "Official Student Management System for Arusha Technical College (ATC).",
@@ -55,6 +54,10 @@ export const metadata: Metadata = {
     description: "Official Student Management System for Arusha Technical College (ATC).",
     images: ["/atc%20logo.png"],
   },
+};
+
+export const viewport = {
+  themeColor: "#003366",
 };
 
 import ProjectInfo from "@/components/ProjectInfo";
