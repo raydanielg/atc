@@ -19,230 +19,384 @@ import {
   ShieldCheck,
   Clock,
   ArrowUpRight,
-  Zap,
-  Vote
+  Zap
 } from "lucide-react";
 
 export default function DashboardPage() {
   return (
     <DashboardShell title="Dashboard Overview">
-      <div className="space-y-8">
-        {/* Student Status Summary */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <StatusCard 
-            title="Academic Level" 
-            value="NTA Level 8" 
-            subValue="BEng in IT (Year 3)" 
-            icon={<GraduationCap className="h-5 w-5" />} 
-            trend="+2% GPA"
-          />
-          <StatusCard 
-            title="Current GPA" 
-            value="3.8" 
-            subValue="First Class" 
-            icon={<PieChart className="h-5 w-5" />} 
-            color="blue"
-          />
-          <StatusCard 
-            title="Registration" 
-            value="Active" 
-            subValue="Semester II (2025/26)" 
-            icon={<UserCheck className="h-5 w-5" />} 
-            color="emerald"
-          />
-          <StatusCard 
-            title="SOTECO" 
-            value="Member" 
-            subValue="BIT 3 Representative" 
-            icon={<Zap className="h-5 w-5" />} 
-            color="orange"
-            href="/dashboard/soteco"
-          />
-        </div>
-
-        <div className="grid gap-6 lg:grid-cols-3">
-          {/* Main Quick Links Grid */}
-          <div className="lg:col-span-2 space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-slate-900">Student Services</h2>
-              <p className="text-xs font-semibold text-slate-400 uppercase tracking-widest">Quick Access</p>
-            </div>
-            <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-              <QuickLinkCard href="/dashboard/registration" title="Registration" icon={<FileText className="h-5 w-5" />} color="blue" />
-              <QuickLinkCard href="/dashboard/modules" title="Modules" icon={<BookOpen className="h-5 w-5" />} color="indigo" />
-              <QuickLinkCard href="/dashboard/timetable" title="Timetable" icon={<Calendar className="h-5 w-5" />} color="emerald" />
-              <QuickLinkCard href="/dashboard/assessment-plans" title="Assessments" icon={<PieChart className="h-5 w-5" />} color="orange" />
-              <QuickLinkCard href="/dashboard/results" title="Results" icon={<GraduationCap className="h-5 w-5" />} color="violet" />
-              <QuickLinkCard href="/dashboard/soteco" title="SOTECO" icon={<Users2 className="h-5 w-5" />} color="red" />
-              <QuickLinkCard href="/dashboard/voting" title="Voting" icon={<Vote className="h-5 w-5" />} color="orange" />
-              <QuickLinkCard href="/dashboard/hostel" title="Hostel" icon={<Bed className="h-5 w-5" />} color="cyan" />
-              <QuickLinkCard href="/dashboard/student-id" title="Student ID" icon={<Contact className="h-5 w-5" />} color="slate" />
-              <QuickLinkCard href="/dashboard/ipt-arrival-note" title="IPT/Training" icon={<MapPin className="h-5 w-5" />} color="amber" />
-            </div>
-          </div>
-
-          {/* Activity & Side Info */}
-          <div className="space-y-6">
-            <div className="flex items-center justify-between">
-              <h2 className="text-lg font-bold text-slate-900">Recent Activity</h2>
-              <History className="h-4 w-4 text-slate-400" />
-            </div>
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <div className="space-y-5">
-                <ActivityItem 
-                  icon={<ShieldCheck className="h-4 w-4 text-emerald-600" />}
-                  title="Success Login"
-                  time="Just now"
-                  location="Arusha, TZ (Desktop)"
-                />
-                <ActivityItem 
-                  icon={<Clock className="h-4 w-4 text-blue-600" />}
-                  title="Result Viewed"
-                  time="2 hours ago"
-                  location="BIT 3 - Semester 1"
-                />
-                <ActivityItem 
-                  icon={<ShieldCheck className="h-4 w-4 text-emerald-600" />}
-                  title="Success Login"
-                  time="Yesterday, 08:34 AM"
-                  location="Arusha, TZ (Mobile)"
-                />
-              </div>
-              <button className="mt-6 w-full rounded-2xl border border-slate-100 bg-slate-50 py-2.5 text-xs font-bold text-slate-500 transition hover:bg-slate-100">
-                View Full Activity Log
-              </button>
-            </div>
-
-            <div className="rounded-3xl bg-blue-600 p-6 text-white">
-              <HelpCircle className="h-6 w-6 text-blue-200" />
-              <h3 className="mt-4 font-bold">Need Help?</h3>
-              <p className="mt-1 text-sm text-blue-100 leading-relaxed">
-                Check the User Manual for a full guide on how to use the portal.
-              </p>
-              <Link 
-                href="/dashboard/user-manual"
-                className="mt-4 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-white hover:underline"
-              >
-                Open Manual
-                <ArrowUpRight className="h-3 w-3" />
-              </Link>
-            </div>
-          </div>
-        </div>
+      <div className="grid grid-cols-2 gap-4 md:grid-cols-3 xl:grid-cols-4">
+        <QuickLinkCard href="/dashboard" title="Dashboard" description="Home" icon={<IconHome />} />
+        <QuickLinkCard
+          href="/dashboard/registration"
+          title="Registration"
+          description="Semester registration"
+          icon={<IconClipboard />}
+        />
+        <QuickLinkCard href="/dashboard/modules" title="Modules" description="My modules" icon={<IconGrid />} />
+        <QuickLinkCard
+          href="/dashboard/timetable"
+          title="Timetable"
+          description="Class schedule"
+          icon={<IconCalendar />}
+        />
+        <QuickLinkCard
+          href="/dashboard/assessment-plans"
+          title="Assessment plans"
+          description="Course assessments"
+          icon={<IconChecklist />}
+        />
+        <QuickLinkCard
+          href="/dashboard/exam-numbers"
+          title="Exam numbers"
+          description="Exam slip numbers"
+          icon={<IconIdCard />}
+        />
+        <QuickLinkCard
+          href="/dashboard/exam-results"
+          title="Exam results"
+          description="Final exam results"
+          icon={<IconChart />}
+        />
+        <QuickLinkCard
+          href="/dashboard/results"
+          title="Results"
+          description="Academic results"
+          icon={<IconChart />} 
+        />
+        <QuickLinkCard
+          href="/dashboard/soteco"
+          title="SOTECO"
+          description="Student Government"
+          icon={<IconUsers />}
+        />
+        <QuickLinkCard
+          href="/dashboard/voting"
+          title="Voting"
+          description="Election portal"
+          icon={<IconVote />}
+        />
+        <QuickLinkCard
+          href="/dashboard/ipt-arrival-note"
+          title="IPT Arrival Note"
+          description="Industrial training"
+          icon={<IconPin />}
+        />
+        <QuickLinkCard href="/dashboard/hostel" title="Hostel" description="Accommodation" icon={<IconBed />} />
+        <QuickLinkCard href="/dashboard/student-id" title="Student ID" description="ID details" icon={<IconCard />} />
+        <QuickLinkCard href="/dashboard/user-manual" title="User manual" description="Help" icon={<IconBook />} />
+        <QuickLinkCard href="/dashboard/alumni" title="Alumni" description="Alumni info" icon={<IconUsers />} />
+        <QuickLinkCard href="/dashboard/profile" title="Profile" description="Your details" icon={<IconUser />} />
       </div>
     </DashboardShell>
   );
 }
 
-function StatusCard({ 
-  title, 
-  value, 
-  subValue, 
-  icon, 
-  trend,
-  color = "slate",
-  href
-}: { 
-  title: string; 
-  value: string; 
-  subValue: string; 
-  icon: ReactNode;
-  trend?: string;
-  color?: string;
-  href?: string;
-}) {
-  const CardWrapper = ({ children }: { children: ReactNode }) => 
-    href ? <Link href={href} className="block transition-transform hover:-translate-y-1">{children}</Link> : <div className="transition-transform hover:-translate-y-1">{children}</div>;
-
-  const colorStyles: Record<string, string> = {
-    blue: "bg-blue-50 text-blue-600",
-    emerald: "bg-emerald-50 text-emerald-600",
-    orange: "bg-orange-50 text-orange-600",
-    slate: "bg-slate-50 text-slate-600"
-  };
-
-  return (
-    <CardWrapper>
-      <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-        <div className="flex items-center justify-between">
-          <div className={`flex h-10 w-10 items-center justify-center rounded-2xl ${colorStyles[color] || colorStyles.slate}`}>
-            {icon}
-          </div>
-          {trend && (
-            <span className="text-[10px] font-bold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
-              {trend}
-            </span>
-          )}
-        </div>
-        <div className="mt-4">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">{title}</p>
-          <p className="mt-1 text-2xl font-bold text-slate-900 tracking-tight">{value}</p>
-          <p className="text-sm text-slate-500">{subValue}</p>
-        </div>
-      </div>
-    </CardWrapper>
-  );
-}
-
-function QuickLinkCard({ 
-  href, 
-  title, 
+function QuickLinkCard({
+  href,
+  title,
+  description,
   icon,
-  color = "blue"
-}: { 
-  href: string; 
-  title: string; 
+}: {
+  href: string;
+  title: string;
+  description: string;
   icon: ReactNode;
-  color?: string;
 }) {
-  const colorStyles: Record<string, string> = {
-    blue: "bg-blue-50 text-blue-600",
-    indigo: "bg-indigo-50 text-indigo-600",
-    emerald: "bg-emerald-50 text-emerald-600",
-    orange: "bg-orange-50 text-orange-600",
-    violet: "bg-violet-50 text-violet-600",
-    red: "bg-red-50 text-red-600",
-    cyan: "bg-cyan-50 text-cyan-600",
-    slate: "bg-slate-50 text-slate-600",
-    amber: "bg-amber-50 text-amber-600"
-  };
-
   return (
     <Link
       href={href}
-      className="group flex flex-col items-center justify-center rounded-3xl border border-slate-100 bg-white p-6 text-center transition-all hover:border-blue-100 hover:bg-blue-50/50 hover:shadow-xl hover:shadow-black/[.02]"
+      className="group w-full rounded-3xl border border-slate-200 bg-white p-6 text-left transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50 hover:shadow-lg hover:shadow-black/[.06] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-blue-500/10 motion-reduce:transform-none"
     >
-      <div className={`flex h-12 w-12 items-center justify-center rounded-2xl ${colorStyles[color] || colorStyles.blue} transition-transform group-hover:scale-110`}>
-        {icon}
+      <div className="flex flex-col items-start">
+        <div className="flex h-12 w-12 items-center justify-center rounded-2xl border border-slate-200 bg-white text-[color:var(--brand-blue)] transition duration-200 group-hover:border-blue-200 group-hover:bg-blue-50 group-hover:scale-[1.03] motion-reduce:transform-none">
+          {icon}
+        </div>
+        <p className="mt-4 text-base font-semibold text-slate-900">{title}</p>
+        <p className="mt-1 text-sm leading-6 text-slate-600">{description}</p>
       </div>
-      <p className="mt-4 text-sm font-bold text-slate-900">{title}</p>
     </Link>
   );
 }
 
-function ActivityItem({ 
-  icon, 
-  title, 
-  time, 
-  location 
-}: { 
-  icon: ReactNode; 
-  title: string; 
-  time: string; 
-  location: string;
-}) {
+function IconHome() {
   return (
-    <div className="flex gap-4">
-      <div className="mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-slate-50 border border-slate-100">
-        {icon}
-      </div>
-      <div className="min-w-0">
-        <p className="text-sm font-bold text-slate-900 truncate">{title}</p>
-        <p className="text-[11px] font-medium text-slate-400">{time}</p>
-        <p className="mt-0.5 text-xs text-slate-500 truncate">{location}</p>
-      </div>
-    </div>
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M4.5 10.5 12 4l7.5 6.5V20a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-9.5Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M10 22v-7h4v7"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
   );
 }
 
+function IconBed() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M4.5 12.5v7M19.5 12.5v7"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M4.5 14.5h15"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M6.5 6.5h11a2 2 0 0 1 2 2v6H4.5v-6a2 2 0 0 1 2-2Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M7.5 10h3"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
 
+function IconCard() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M4.5 7.5h15v11a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-11Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path d="M4.5 10.5h15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M8 14h5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M8 17h3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconUser() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M16.5 20.5c0-2.2-2.1-4-4.7-4s-4.8 1.8-4.8 4"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M12 13.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconBook() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M4.5 5.5c0-1.105.895-2 2-2H19.5v15H6.5a2 2 0 0 0-2 2V5.5Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M19.5 18.5H6.5a2 2 0 0 0-2 2V21.5H19.5"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconClipboard() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M9 4.5h6M9 4.5a2 2 0 0 0-2 2V20a2 2 0 0 0 2 2h6a2 2 0 0 0 2-2V6.5a2 2 0 0 0-2-2M9 4.5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M9 10h6M9 14h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconCalendar() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path d="M7 3.5v3M17 3.5v3" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M4.5 7.5h15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path
+        d="M6.5 5.5h11a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-11a2 2 0 0 1 2-2Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M8 11h3M13 11h3M8 15h3"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function IconChart() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path d="M5.5 19.5V4.5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M5.5 19.5h14" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path d="M8 16v-5M12 16V7M16 16v-8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+    </svg>
+  );
+}
+
+function IconGrid() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M4.5 4.5h6v6h-6v-6Zm9 0h6v6h-6v-6Zm-9 9h6v6h-6v-6Zm9 0h6v6h-6v-6Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconChecklist() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M9 6.5h10M9 12h10M9 17.5h10"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M5 6.5l1.1 1.1L7.8 5.8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5 12l1.1 1.1L7.8 11.3"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M5 17.5l1.1 1.1 1.7-1.8"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconIdCard() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M4.5 7.5h15v11a2 2 0 0 1-2 2h-11a2 2 0 0 1-2-2v-11Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path d="M8 11.5h6M8 15.5h6" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
+      <path
+        d="M4.5 7.5V6.5a2 2 0 0 1 2-2h11a2 2 0 0 1 2 2v1"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconPin() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M12 22s7-5.2 7-12a7 7 0 1 0-14 0c0 6.8 7 12 7 12Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 12a2.3 2.3 0 1 0 0-4.6A2.3 2.3 0 0 0 12 12Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
+
+function IconUsers() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M16.5 20.5c0-2.2-2.1-4-4.7-4s-4.8 1.8-4.8 4"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+      <path
+        d="M12 13.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M18.5 20.5c0-1.6-1-3-2.6-3.6"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+      />
+    </svg>
+  );
+}
+
+function IconVote() {
+  return (
+    <svg viewBox="0 0 24 24" className="h-5 w-5" fill="none" aria-hidden="true">
+      <path
+        d="M9 22H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M12 2v4M7 8l5 5 5-5M12 13V22"
+        stroke="currentColor"
+        strokeWidth="1.8"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+}
