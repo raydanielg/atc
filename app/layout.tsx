@@ -57,6 +57,8 @@ export const metadata: Metadata = {
   },
 };
 
+import ProjectInfo from "@/components/ProjectInfo";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -68,6 +70,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
+        <ProjectInfo />
       </body>
     </html>
   );
